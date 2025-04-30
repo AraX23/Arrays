@@ -1,0 +1,58 @@
+using System;
+using System.Linq;
+
+class MedianGradesForNorsunianStudents
+{
+    static void Main()
+    {
+        Console.WriteLine("==========MEDIAN WITH 1D ARRAY==========\n");
+       
+        double[] Ciara = { 85, 90, 75 }; // 1
+        double[] Eliza = { 88, 84, 92 }; // 2
+        double[] Sam = { 70, 75, 80 }; // 3
+        double[] Owen = { 95, 93, 97 }; // 4
+        double[] Anthony = { 65, 68, 72 }; // 5
+
+        double[] medGradesStds = new double[5];
+        double[] allGrades = Ciara.Concat(Eliza).Concat(Sam).Concat(Owen).Concat(Anthony).ToArray();
+
+        Console.WriteLine("------------STUDENT'S GRADES------------\n");
+        Console.WriteLine($"\t     Ciara: {string.Join(", ", Ciara)}");
+        Console.WriteLine($"\t     Eliza: {string.Join(", ", Eliza)}");
+        Console.WriteLine($"\t     Sam: {string.Join(", ", Sam)}");
+        Console.WriteLine($"\t     Owen: {string.Join(", ", Owen)}");
+        Console.WriteLine($"\t     Anthony: {string.Join(", ", Anthony)}\n");
+
+        medGradesStds[0] = CalculateMedian(Ciara);
+        medGradesStds[1] = CalculateMedian(Eliza);
+        medGradesStds[2] = CalculateMedian(Sam);
+        medGradesStds[3] = CalculateMedian(Owen);
+        medGradesStds[4] = CalculateMedian(Anthony);
+
+        Console.WriteLine("---INDIVIDUAL STUDENTS' MEDIAN GRADES---\n");
+        Console.WriteLine($"\t     Ciara: {medGradesStds[0]}");
+        Console.WriteLine($"\t     Eliza: {medGradesStds[1]}");
+        Console.WriteLine($"\t     Sam: {medGradesStds[2]}");
+        Console.WriteLine($"\t     Owen: {medGradesStds[3]}");
+        Console.WriteLine($"\t     Anthony: {medGradesStds[4]}");
+
+        double overallMedian = CalculateMedian(allGrades);
+        Console.WriteLine("\n------ALL STUDENTS' MEDIAN GRADES------");
+        Console.WriteLine($"\n\t   Overall Median: {overallMedian}\n");
+    }
+
+    static double CalculateMedian(double[] array)
+    {
+        Array.Sort(array);
+        int mid = array.Length / 2;
+
+        if (array.Length % 2 == 0)
+        {
+            return (array[mid - 1] + array[mid]) / 2.0;
+        }
+        else
+        {
+            return array[mid];
+        }
+    }
+}
